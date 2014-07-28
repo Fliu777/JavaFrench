@@ -10,7 +10,7 @@ import java.util.Scanner;
 class SubMap {
 	// private TreeMap accent= new TreeMap();
 	private HashMap<String, Integer> accent = new HashMap<String, Integer>();
-
+	
 	public SubMap(String a) {
 		accent.put(a, 1);
 	}
@@ -61,16 +61,23 @@ public class GetAccents {
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(
 				new FileInputStream(fileDir), "UTF-8"));
+		
+		//printer
+	/*	  PrintWriter out1 = null; try { out1 = new PrintWriter(new
+		  File("Accented.txt"), "UTF-8"); } catch (FileNotFoundException |
+		  UnsupportedEncodingException e) { // TODO Auto-generated catch block
+		  e.printStackTrace(); }*/
 
 		String str;
-		int place = 0;
 		String t;
 		char tt;
 		String t1, t2;
+		boolean flag=false;
 		while ((str = in.readLine()) != null) {
 			String[] temp = str.split(" |-|\\.|_|'|,|;|\\?");
 			for (int i = 0; i < temp.length; i++) {
 				t = temp[i].toLowerCase();
+				flag=true;
 				for (int j = 0; j < t.length(); j++) {
 					tt = t.charAt(j);
 					if (tt == 'à' || tt == 'â' || tt == 'ä' || tt == 'æ'
@@ -78,6 +85,11 @@ public class GetAccents {
 							|| tt == 'ë' || tt == 'î' || tt == 'ï' || tt == 'ô'
 							|| tt == 'œ' || tt == 'ù' || tt == 'û' || tt == 'ü') {
 						t1 = t.substring(0, j);
+						if (flag){
+							//out1.write(t+"\n");
+							flag=false;
+						}
+
 
 						// last letter
 						if ((j + 1) == t.length()) {
@@ -94,14 +106,15 @@ public class GetAccents {
 				}
 			}
 		}
-		for (Map.Entry<String, SubMap> entry : ReferenceTable.entrySet()) {
+		//out1.close();
+		/*for (Map.Entry<String, SubMap> entry : ReferenceTable.entrySet()) {
 			System.out.println(entry.getKey());
 			for (Map.Entry<String, Integer> entry2 : entry.getValue().getHash()
 					.entrySet()) {
 				System.out.print(entry2.getKey() + " ");
 				System.out.println(entry2.getValue());
 			}
-		}
+		}*/
 
 	}
 
@@ -111,7 +124,7 @@ public class GetAccents {
 		ArrayList<String> stringList = new ArrayList<String>();
 
 		try {
-			ConstructFreq("pg19657.txt");
+			ConstructFreq("Accented.txt");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
