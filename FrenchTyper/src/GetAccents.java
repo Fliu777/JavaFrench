@@ -2,10 +2,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 class SubMap {
 	// private TreeMap accent= new TreeMap();
@@ -95,7 +93,8 @@ public class GetAccents {
 							t1 += "a";
 						} else if (tt == 'ç') {
 							t1 += "c";
-						} else if (tt == 'é' || tt == 'è' || tt == 'ê' || tt == 'ë') {
+						} else if (tt == 'é' || tt == 'è' || tt == 'ê'
+								|| tt == 'ë') {
 							t1 += "e";
 						} else if (tt == 'î' || tt == 'ï') {
 							t1 += "i";
@@ -104,7 +103,7 @@ public class GetAccents {
 						} else if (tt == 'ô') {
 							t1 += "o";
 						} else {
-							//System.err.println("weird case");
+							// System.err.println("weird case");
 						}
 
 						// last letter
@@ -126,36 +125,32 @@ public class GetAccents {
 		// out1.close();
 
 	}
-	
-	public static String GetBest(String query, char next){
-		//System.out.println("sending <"+ query + ">and <"+ next+">");
-		
-		String best="";
-		int b=-1;
-		SubMap tempvalue=ReferenceTable.get(query);
-		if (tempvalue==null){
-			System.err.println("cannot locate");
+
+	public static String GetBest(String query, char next) {
+		// System.out.println("sending <"+ query + ">and <"+ next+">");
+
+		String best = "";
+		int b = -1;
+		SubMap tempvalue = ReferenceTable.get(query);
+		if (tempvalue == null) {
+			System.err.println("cannot locate<"+query+"><"+next+">");
 			return "";
 		}
-		
 
-		
-		for (Map.Entry<String, Integer> entry2 : ReferenceTable.get(query).getHash().entrySet()) {
-			//System.out.println(entry2.getKey());
-			//System.out.println(entry2.getValue());
-			//check next letter
-			if (entry2.getKey().charAt(1)==next &&  entry2.getValue()>b){
-				b=entry2.getValue();
-				best=entry2.getKey();
+		for (Map.Entry<String, Integer> entry2 : ReferenceTable.get(query)
+				.getHash().entrySet()) {
+			// System.out.println(entry2.getKey());
+			// System.out.println(entry2.getValue());
+			// check next letter
+			if (entry2.getKey().charAt(1) == next && entry2.getValue() > b) {
+				b = entry2.getValue();
+				best = entry2.getKey();
 			}
 		}
 		return best;
 	}
 
 	public static void BuildAccents() {
-		String str;
-		int count = 0;
-		ArrayList<String> stringList = new ArrayList<String>();
 
 		try {
 			ConstructFreq("Accented.txt");
@@ -164,16 +159,13 @@ public class GetAccents {
 			e.printStackTrace();
 		}
 
-		/*while (true) {
-			Scanner sc = new Scanner(System.in);
-			System.out.println("Enter query");
-			String query = sc.next();
-			for (Map.Entry<String, Integer> entry2 : ReferenceTable.get(query)
-					.getHash().entrySet()) {
-				System.out.print(entry2.getKey() + " ");
-				System.out.println(entry2.getValue());
-			}
-		}*/
+		/*
+		 * while (true) { Scanner sc = new Scanner(System.in);
+		 * System.out.println("Enter query"); String query = sc.next(); for
+		 * (Map.Entry<String, Integer> entry2 : ReferenceTable.get(query)
+		 * .getHash().entrySet()) { System.out.print(entry2.getKey() + " ");
+		 * System.out.println(entry2.getValue()); } }
+		 */
 
 		/*
 		 * try { File fileDir = new File("fr.txt");
