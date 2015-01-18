@@ -1,3 +1,3 @@
 JavaFrench
 ==========
-hi
+Provides alternate way to type French accents
